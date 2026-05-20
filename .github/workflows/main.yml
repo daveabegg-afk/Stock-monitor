@@ -1,8 +1,8 @@
 import os
 
 # --- Configuration pulled from GitHub Secrets ---
-PUSH_USER_KEY = os.getenv("PUSH_USER_KEY")
-PUSH_API_TOKEN = os.getenv("PUSH_API_TOKEN")
+PUSH_USER_KEY = os.getenv("350993352091385")
+PUSH_API_TOKEN = os.getenv("ghp_6ih7YW7E7HASCOqBqU7425Yn0bKMiM3MPY2t")
 TICKERS = ["AAPL", "MSFT", "GOOGL"] # Update your list here
 THRESHOLD_PERCENT = 0.02
 #----Market Monitor Agent
