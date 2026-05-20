@@ -1,0 +1,39 @@
+import os
+
+# --- Configuration pulled from GitHub Secrets ---
+PUSH_USER_KEY = os.getenv("PUSH_USER_KEY")
+PUSH_API_TOKEN = os.getenv("PUSH_API_TOKEN")
+TICKERS = ["AAPL", "MSFT", "GOOGL"] # Update your list here
+THRESHOLD_PERCENT = 0.02
+#----Market Monitor Agent
+name: Market Monitor Agent
+
+on:
+  schedule:
+    # Runs at 21:30 UTC (3:30 PM CST) Monday-Friday
+    - cron: '30 21 * * 1-5'
+  workflow_dispatch: # Allows you to run it manually for testing
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install yfinance requests
+
+      - name: Run Market Agent
+        env:
+          # These pull from your GitHub Secrets for security
+          PUSH_USER_KEY: ${{ secrets.PUSH_USER_KEY }}
+          PUSH_API_TOKEN: ${{ secrets.PUSH_API_TOKEN }}
+        run: python stock_agent.py
