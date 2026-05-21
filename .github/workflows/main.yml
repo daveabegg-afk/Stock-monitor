@@ -1,4 +1,5 @@
-import os
+import yfinance as yf
+import requests
 
 # --- Configuration pulled from GitHub Secrets ---
 PUSH_USER_KEY = os.getenv("350993352091385")
